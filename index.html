@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock, Paper and Scissors</title>
+</head>
+<body>
+  <script>
+    // default values to be used by functions
+    playerScore = 0
+    computerScore = 0
+    playerSelection = 0;
+    computerSelection = 0;
+    
+    /* Used a random number generator from 1 to 3. Made sure that it's always an integer by 
+       using Math.floor to round off to integers.
+       Then I assigned rock =1, paper = 2, scissors =3.   */
+  
+    function computerPlay() {
+      a = Math.floor(Math.random() * 3) + 1;
+      if (a == 1) {
+        return "rock";
+      }
+      else if (a == 2) {
+        return "paper";
+      }
+      else {
+        return "scissors";
+      }
+    }
+    // Function used to start the game. Created a scoring system using if..else
+    function game() {
+      playRound(playerSelection, computerSelection);
+      if (playerScore == 3) {
+        playerScore = 0;
+        computerScore = 0;
+        console.log("You win! Computer Lose!")
+        
+      }
+      else if (computerScore == 3) {
+        playerScore = 0;
+        computerScore = 0;
+        console.log("You Lose! Computer Wins!")
+      }
+      else {
+        game();
+      }
+
+    }
+    // The main function to start the round. Remember that using "return" doesn't print! 
+    function playRound(playerSelection, computerSelection) {
+      playerSelection = prompt("Rock, Paper or Scissors?");
+      playerSelection = playerSelection.toLowerCase();
+      computerPlay();
+      computerSelection = computerPlay(); 
+      if (playerSelection == 'rock' && computerSelection == 'paper') {
+        computerScore = computerScore + 1;
+        return console.log("You Lose! Paper Beats Rock "+ "\nYou: " + playerScore + " Computer: " + computerScore);
+      }
+      else if (playerSelection == 'rock' && computerSelection == 'scissors') {
+        playerScore = playerScore + 1;
+        return console.log("You Win! Rock Beats Scissors " + "\nYou: " + playerScore + " Computer: " + computerScore);
+      }
+      else if (playerSelection == 'paper' && computerSelection == 'rock') {
+        playerScore = playerScore + 1;
+        return console.log("You Win! Rock Beats Paper " + "\nYou: " + playerScore + " Computer: " + computerScore);
+      }
+      else if (playerSelection == 'paper' && computerSelection == 'scissors') {
+        computerScore = computerScore + 1;
+        return console.log("You Lose! Scissors Beats Paper" + "\nYou: " + playerScore + " Computer: " + computerScore);
+      }
+      else if (playerSelection == 'scissors' && computerSelection == 'rock') {
+        computerScore = computerScore + 1;
+        return console.log("You Lose! Rock Beats Scissors" + "\nYou: " + playerScore + " Computer: " + computerScore);
+      }
+      else if (playerSelection == 'scissors' && computerSelection == 'paper') {
+        playerScore = playerScore + 1;
+        return console.log("You Win! Scissors beats Paper" + "\nYou: " + playerScore + " Computer: " + computerScore);
+      }
+      else if (playerSelection == computerSelection) {
+        return console.log("Draw! "  + "\nYou: " + playerScore + " Computer: " + computerScore);
+      }
+      else {
+        return console.log("Invalid Entry");
+      }
+    }
+  </script>
+</body>
+</html>
